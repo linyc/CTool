@@ -16,7 +16,7 @@ namespace CTool.CUtility
         /// <param name="targetStr">要匹配的字符串</param>
         /// <param name="regexOptionEnum">匹配属性</param>
         /// <returns></returns>
-        public static bool RegExp(string pat, string targetStr, RegexOptions regexOptionEnum = RegexOptions.None)
+        public static bool RegExp(string pat, string targetStr, RegexOptions regexOptionEnum = RegexOptions.IgnoreCase)
         {
             Regex reg = new Regex(pat, regexOptionEnum);
             Match match = reg.Match(targetStr);
@@ -27,20 +27,21 @@ namespace CTool.CUtility
             return false;
         }
         /// <summary>
-        /// 传入消息进行弹窗提示，如果confirm传入true，即可获取返回的结果(Yes|No)，默认返回(OK)
+        /// 传入消息进行弹窗提示，
         /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="confirm"></param>
+        /// <param name="msg">要提示的消息</param>
+        /// <param name="formTitle">提示框标题文字，传null默认标题为"提示"</param>
+        /// <param name="confirm">如果传入true，即可获取返回的结果(Yes|No)，不传默认返回(OK)</param>
         /// <returns></returns>
-        public static DialogResult ShowMsg(string msg, bool confirm = false)
+        public static DialogResult ShowMsg(string msg, string formTitle, bool confirm = false)
         {
             if (confirm)
             {
-                return MessageBox.Show(msg, "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                return MessageBox.Show(msg, formTitle ?? "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             }
             else
             {
-                return MessageBox.Show(msg,"提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                return MessageBox.Show(msg, formTitle ?? "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
         /// <summary>
@@ -48,7 +49,7 @@ namespace CTool.CUtility
         /// </summary>
         /// <param name="frm">传this</param>
         /// <param name="i"></param>
-        public static void SetCursorStatue(Form frm,int i)
+        public static void SetCursorStatue(Form frm, int i)
         {
             frm.Cursor = i == 0 ? Cursors.WaitCursor : Cursors.Default;
         }
@@ -90,7 +91,7 @@ namespace CTool.CUtility
         public static void WriteLog(string msg)
         {
             DateTime dt = DateTime.Now;
-            File.AppendAllText(dt.ToString("yyyy-MM-dd")+".log", dt.ToString("HH:mm:ss") + "\t" + msg + "\r\n");
+            File.AppendAllText(dt.ToString("yyyy-MM-dd") + ".log", dt.ToString("HH:mm:ss") + "\t" + msg + "\r\n");
         }
 
         #region 加密、解密字符串
