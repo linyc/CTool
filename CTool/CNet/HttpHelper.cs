@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace CTool.CNet
 {
@@ -128,5 +129,54 @@ namespace CTool.CNet
                 }
             }
         }
+
+        /// <summary>
+        /// 设置cookie
+        /// </summary>
+        /// <param name="cookieName">cookie名</param>
+        /// <param name="keyValues">该cookie里的键值对</param>
+        /// <param name="expries">cookie过期时间,不传参数默认一天后过期</param>
+        /// <param name="domain">如果要跨域访问,该参数必需传入,如传入"cn100.com"</param>
+        public void SetCookies(string cookieName, Dictionary<string,string> keyValues,DateTime? expries=null,string domain=null)
+        {
+            if (string.IsNullOrEmpty(cookieName))
+                throw new ArgumentNullException("cookieName");
+
+            try
+            {
+                System.Web.HttpCookie cookie = new HttpCookie(cookieName);
+                if (!string.IsNullOrEmpty(domain))
+                {
+                    cookie.Domain = domain;
+                    cookie.Path = "/";
+                }
+                cookie.Expires = expries ?? DateTime.Now.AddDays(1);
+                foreach (var item in keyValues)
+                {
+                    cookie.Values.Add(item.Key, item.Value);
+                }
+                System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 读取cookie
+        /// </summary>
+        /// <param name="cookieName">cookie名</param>
+        /// <returns>返回cookie名称/值列表,可通过索引访问,如果知道名称,可通过名称索引访问</returns>
+        public NameValueCollection GetCookies(string cookieName)
+        {
+            System.Web.HttpCookie cookies = System.Web.HttpContext.Current.Request.Cookies.Get(cookieName);
+
+            if (cookies != null)
+                return cookies.Values;
+            
+            return null;
+        }
+
     }
 }

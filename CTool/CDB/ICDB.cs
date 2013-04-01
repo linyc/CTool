@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace CTool.CDB
 {
@@ -17,7 +18,7 @@ namespace CTool.CDB
         bool Open();
         void Close();
         int ExecuteNonQuery(string strSql);
-        int ExecuteNonQuery(string strSql, string[] pars, object[] vals);
+        int ExecuteNonQuery(string strSql, Dictionary<string,object> dicParams);
         bool IsExistTable(string tableName);
     }
 }

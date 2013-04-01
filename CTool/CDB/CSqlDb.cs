@@ -2,6 +2,8 @@
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CTool.CDB
 {
@@ -61,15 +63,16 @@ namespace CTool.CDB
             return 0;
         }
 
-        public int ExecuteNonQuery(string strSql,string[] pars, object[] vals)
+        public int ExecuteNonQuery(string strSql,Dictionary<string,object> dicParams)
         {
             if (Open())
             {
                 cmd.Parameters.Clear();
                 cmd.CommandText = strSql;
-                for (int i = 0; i < pars.Length; i++)
+
+                foreach (var item in dicParams)
                 {
-                    cmd.Parameters.Add(new OleDbParameter(pars[i], vals[i]));
+                    cmd.Parameters.Add(item.Key, item.Value);
                 }
                 return cmd.ExecuteNonQuery();
             }

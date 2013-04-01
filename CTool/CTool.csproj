@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CConfig\ConfigHelper.cs" />
     <Compile Include="CControl\DataGridViewCheckBoxHeaderCell.cs" />
     <Compile Include="CDB\COleDb.cs" />
     <Compile Include="CDB\CSqlDb.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="CIO\ReaderCSV.cs" />
     <Compile Include="CNet\HttpHelper.cs" />
     <Compile Include="CNet\Util.cs" />
+    <Compile Include="CUtility\DESEncrypt.cs" />
     <Compile Include="CUtility\TreeViewTool.cs" />
     <Compile Include="CIO\Zip.cs" />
     <Compile Include="Class1.cs" />
@@ -68,6 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\Microsoft.Office.Interop.Excel.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CConfig\App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
