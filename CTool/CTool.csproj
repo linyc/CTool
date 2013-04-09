@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="CConfig\ConfigHelper.cs" />
     <Compile Include="CControl\DataGridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="CControl\DataGridViewDisableButtonCell.cs" />
+    <Compile Include="CControl\DataGridViewDisableLinkCell.cs" />
     <Compile Include="CDB\COleDb.cs" />
     <Compile Include="CDB\CSqlDb.cs" />
     <Compile Include="CDB\ICDB.cs" />
