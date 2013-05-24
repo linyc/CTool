@@ -50,9 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CConfig\ConfigHelper.cs" />
+    <Compile Include="CControl\BarcodeControl.cs" />
     <Compile Include="CControl\DataGridViewCheckBoxHeaderCell.cs" />
     <Compile Include="CControl\DataGridViewDisableButtonCell.cs" />
     <Compile Include="CControl\DataGridViewDisableLinkCell.cs" />
+    <Compile Include="CControl\PanelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CControl\PanelEx.Designer.cs">
+      <DependentUpon>PanelEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="CDB\COleDb.cs" />
     <Compile Include="CDB\CSqlDb.cs" />
     <Compile Include="CDB\ICDB.cs" />
